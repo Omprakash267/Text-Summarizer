@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clinical Note Summarizer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div>
+          <h1 class="app-title">Clinical Note Summarizer</h1>
+          <p class="app-subtitle">
+            Summarize text and extract medical signals (symptoms, medications, note type).
+          </p>
+        </div>
+        <div class="app-meta">
+          <div
+            id="backendStatus"
+            class="status-pill"
+            role="button"
+            tabindex="0"
+            aria-label="Backend status (click to re-check)"
+            aria-live="polite"
+          >
+            Backend: checking…
+          </div>
+          <div id="apiBaseUrl" class="meta-hint"></div>
+          <div class="meta-hint">API override: <code>?api=http://localhost:5000</code></div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel" aria-label="Input">
+          <div class="panel-header">
+            <h2 class="panel-title">Input</h2>
+            <div class="panel-actions">
+              <button id="clearBtn" class="btn btn-ghost" type="button">Clear</button>
+            </div>
+          </div>
+
+          <label class="field-label" for="inputText">Clinical note or article text</label>
+          <textarea id="inputText" class="textarea" rows="12" placeholder="Paste text here…"></textarea>
+          <div class="field-hint">
+            <span id="charCount">0 characters</span>
+            <span class="dot">·</span>
+            <span id="selectionCount">0 selected</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label" for="method">Summarization method</label>
+              <select id="method" class="select">
+                <option value="extractive">Extractive (TF‑IDF + spaCy)</option>
+                <option value="abstractive">Abstractive (BART)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="numSentences">Sentences (extractive)</label>
+              <input
+                type="number"
+                id="numSentences"
+                class="input"
+                value="3"
+                min="1"
+                max="10"
+                inputmode="numeric"
+              />
+              <div id="numSentencesHint" class="field-hint subtle">Used only for extractive summaries.</div>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button id="summarizeBtn" class="btn btn-primary" type="button">Summarize</button>
+            <button id="analyzeBtn" class="btn btn-secondary" type="button">Analyze Note</button>
+          </div>
+
+          <div id="errorMsg" class="callout callout-error" role="alert" hidden></div>
+        </section>
+
+        <section class="panel" aria-label="Output">
+          <div class="tabs" role="tablist" aria-label="Output tabs">
+            <button
+              id="tabSummaryBtn"
+              class="tab is-active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="tabSummary"
+            >
+              Summary
+            </button>
+            <button
+              id="tabAnalysisBtn"
+              class="tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="tabAnalysis"
+            >
+              Analysis
+            </button>
+          </div>
+
+          <div class="tab-panels">
+            <div id="tabSummary" class="tab-panel is-active" role="tabpanel" aria-labelledby="tabSummaryBtn">
+              <div class="panel-header">
+                <h2 class="panel-title">Summary</h2>
+                <div id="methodBadge" class="badge" hidden></div>
+              </div>
+
+              <div id="summaryEmpty" class="empty">Run <strong>Summarize</strong> to generate a summary.</div>
+
+              <div id="resultCard" hidden>
+                <div id="summaryOutput" class="prose" aria-live="polite"></div>
+                <div class="button-row">
+                  <button id="copyBtn" class="btn btn-ghost" type="button">Copy</button>
+                  <button id="downloadBtn" class="btn btn-ghost" type="button">Download</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="tabAnalysis" class="tab-panel" role="tabpanel" aria-labelledby="tabAnalysisBtn">
+              <div class="panel-header">
+                <h2 class="panel-title">Note Analysis</h2>
+              </div>
+
+              <div id="analysisEmpty" class="empty">
+                Run <strong>Analyze Note</strong> to classify and extract entities.
+              </div>
+
+              <div id="entitiesCard" hidden>
+                <div class="metrics">
+                  <div class="metric">
+                    <div class="metric-label">Note type</div>
+                    <div id="noteTypeOutput" class="metric-value">-</div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-label">Symptoms</div>
+                    <div id="symptomsOutput" class="chip-row" aria-live="polite"></div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-label">Medications</div>
+                    <div id="medicationsOutput" class="chip-row" aria-live="polite"></div>
+                  </div>
+                </div>
+                <pre id="analysisOutput" class="codeblock" aria-label="Raw analysis output"></pre>
+              </div>
+            </div>
+          </div>
+
+          <div id="loader" class="loader" hidden>
+            <div class="spinner" aria-hidden="true"></div>
+            <div id="loaderText">Working…</div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>Tip: If you see “Cannot connect”, start the Flask backend on port 5000.</span>
+      </footer>
+    </div>
+
+    <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

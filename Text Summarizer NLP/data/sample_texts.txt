@@ -1,0 +1,15 @@
+1) Short article (science)
+The human heart is a powerful muscular pump that circulates blood through the body day and night. It beats about 100,000 times in a typical day, pushing oxygen-rich blood out to tissues and returning oxygen-poor blood back to the lungs. The heart has four chambers: two atria that receive blood and two ventricles that pump it onward. Healthy circulation depends on the coordinated timing of electrical signals that make the chambers contract in sequence. When that rhythm is disrupted, blood flow can become less efficient and symptoms like fatigue or shortness of breath may appear.
+
+2) Medium article (technology)
+Artificial intelligence is changing how many companies build products and make decisions. In a typical workflow, teams collect data, clean it, and train machine learning models to predict outcomes such as demand, risk, or customer churn. Deep learning approaches can learn complex patterns from large datasets, but they also require careful evaluation to avoid overfitting and bias. As AI systems become more capable, organizations increasingly combine automation with human review, especially in high-impact settings. Good documentation and monitoring help ensure the model keeps working as real-world data changes over time.
+
+3) Medium article (environment)
+Climate change refers to long-term shifts in average temperatures and weather patterns across the world. Since the 1800s, human activities such as burning coal, oil, and gas have increased greenhouse gases in the atmosphere, trapping more heat. Many regions are experiencing more frequent extreme weather, including heat waves and heavy rainfall. Reducing emissions, improving energy efficiency, and expanding low-carbon power are common strategies discussed to slow the trend. Adaptation measures, like flood planning and heat-resilient infrastructure, can also reduce the impacts on communities.
+
+4) Longer article (education)
+Learning a new skill usually involves an early period of rapid progress followed by a slower phase where improvements are harder to notice. During the first stage, learners are building basic familiarity and gaining confidence. In the next stage, practice becomes more deliberate: people focus on correcting mistakes, refining technique, and increasing consistency. Feedback is important, but so is rest, because fatigue can reduce attention and make practice less effective. Breaking a big goal into smaller milestones can keep motivation steady. Over time, repeated practice helps turn effortful steps into habits that require less conscious thought.
+
+5) Clinical note style (for /analyze)
+Chief complaint: fever and cough for 3 days with fatigue. Patient reports headache and mild dizziness. No chest pain. Plan: symptomatic care and hydration. Medication: paracetamol 500 mg twice daily for 2 days. Return if shortness of breath worsens.
+
